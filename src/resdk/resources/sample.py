@@ -69,6 +69,9 @@ class Sample(SampleUtilsMixin, BaseCollection):
         if self._variants is None:
             self._variants = self.resolwe.variant.filter(variant_calls__sample=self.id)
         return self._variants
+    
+    def variants_by_experiment(self, experiment):
+        self.resolwe.variant.filter(variant_calls__sample=self.id, variant_calls__experiment=experiment)
 
     @property
     def collection(self):
